@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish DOM Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main {
+      width: 90vw;
+      height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      background: #0f3460;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center {
+      width: 95%;
+      height: 95%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top Button Section */
+    .first {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      height: 10%;
+    }
+
+    .first button {
+      flex: 1;
+      background: linear-gradient(135deg, #ff8c00, #ff2e63);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .first button:hover {
+      background: linear-gradient(135deg, #ff2e63, #ff8c00);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(255, 140, 0, 0.4);
+    }
+
+    .first button:active {
+      transform: scale(0.97);
+    }
+
+    /* Paragraph Container */
+    .second {
+      flex: 1;
+      background: #e0f7fa;
+      border-radius: 15px;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .second::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .second::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 10px;
+    }
+
+    /* Paragraph Style */
+    .second p {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .second p:hover {
+      transform: translateY(-3px);
+      transition: all 0.3s ease;
+    }
+
+    .icon {
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #ffeb3b;
+      transition: all 0.3s ease;
+    }
+
+    .icon:hover {
+      color: #ff1744;
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="center">
+      <div class="first">
+        <button onclick="create()"><i class="fa fa-plus"></i> Create</button>
+        <button onclick="deletefirst()"><i class="fa fa-minus-circle"></i> Delete First</button>
+        <button onclick="deleteall()"><i class="fa fa-trash"></i> Delete All</button>
+      </div>
+
+      <div class="second"></div>
+    </div>
+  </div>
+
+  <script>
+    let center = document.querySelector(".center");
+    let second = document.querySelector(".second");
+    let count = 1;
+
+    function create() {
+      const p = document.createElement("p");
+      p.id = `p${count}`;
+      p.innerHTML = `This is Paragraph <strong>#${count}</strong> <i class="fa fa-trash icon" onclick="deleteItem('p${count}')"></i>`;
+      count++;
+      second.appendChild(p);
+    }
+
+    function deleteItem(id) {
+      const p = document.getElementById(id);
+      if (p) second.removeChild(p);
+    }
+
+    function deletefirst() {
+      if (second.firstChild) second.removeChild(second.firstChild);
+    }
+
+    function deleteall() {
+      second.innerHTML = "";
+    }
+  </script>
+</body>
+
+</html>
